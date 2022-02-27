@@ -106,11 +106,12 @@ class TwitterClient(object):
             print("Error : " + str(e))
 
 
+
 def main():
     # creating object of TwitterClient Class
     api = TwitterClient()
     # calling function to get  for the topic of space
-    tweets = api.get_tweets(query='Space', count=300)
+    tweets = api.get_tweets(query='Space', count=100)
 
     # picking positive tweets from tweets
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
@@ -123,6 +124,15 @@ def main():
     # percentage of neutral tweets
     print("Neutral tweets: {} % \
         ".format(100 * (len(tweets) - (len(ntweets) + len(ptweets))) / len(tweets)))
+    # printing first 5 positive tweets
+    print("\n\nPositive tweets:")
+    for tweet in ptweets[:10]:
+        print(tweet['text'])
+
+    # printing first 5 negative tweets
+    print("\n\nNegative tweets:")
+    for tweet in ntweets[:10]:
+        print(tweet['text'])
 
 if __name__ == "__main__":
     print("Welcome to the Tweet extractor for the topic of space.\n")
